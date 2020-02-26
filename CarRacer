@@ -1,0 +1,56 @@
+var car_player = createSprite(50, 150, 10, 10);
+var car_comp1 = createSprite(50, 250, 10, 10);
+var car_comp2 = createSprite(50, 265, 10, 10);
+var car_comp3 = createSprite(50, 280, 10, 10);
+var car_comp4 = createSprite(50, 295, 10, 10);
+var top_wall = createSprite(5, 50, 300, 10);
+var finish = createSprite(350, 99, 10, 250);
+var bottom_wall = createSprite(5, 200, 350, 10);
+var nitro = createSprite(200, 200, 15, 15);
+car_comp1.velocityX = randomNumber(1, randomNumber(1, 10));
+car_comp2.velocityX = randomNumber(1, randomNumber(1, 10));
+car_comp3.velocityX = randomNumber(randomNumber(1, 10), 10);
+car_comp4.velocityX = randomNumber(randomNumber(1, 10), 10);
+car_player.velocityX = 3;
+function draw() {
+  background("white");
+  createEdgeSprites();
+
+if (keyDown("up")) {
+  car_player.velocityY = -3;
+}
+if (keyDown("down")) {
+  car_player.velocityY = 3;
+}
+if (keyDown("left")) {
+  car_player.velocityX = -3;
+}
+if (keyDown("right")) {
+  car_player.velocityX = 3;
+}
+if (car_player.bounceOff(top_wall) || car_player.bounceOff(finish) ||car_player.bounceOff(bottom_wall)|| car_player.bounceOff(nitro)) {
+  
+ car_player.velocityX = 0;
+ car_player.velocityY = 0;
+ 
+}
+  if(car_player.velocityX == 0 && car_player.velocityY == 0){
+  textSize(20);
+  text("You Lose", 170, 120);
+}
+if(car_comp1.x>400 || car_comp2.x>400 ||car_comp3.x>400 ||car_comp4.x>400){
+   textSize(15);
+  text("Another Car touched finished line", 100, 150);
+}
+if(car_player.x>400){
+  textSize(15);
+  text("You Won", 170, 120);
+}
+  car_player.bounceOff(bottomEdge);
+  car_player.bounceOff(topEdge);
+  car_player.bounceOff(leftEdge);
+  createEdgeSprites();
+  drawSprites();
+}
+
+code.org link : https://studio.code.org/projects/gamelab/TTsysFS1EE67KC87z2-I9Ud4FEsc9Znizu27iy-Z86g
